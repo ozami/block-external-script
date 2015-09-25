@@ -1,9 +1,21 @@
 var global_white_list = {
-
+  "googleapis.com": true,
+  "cloudfront.net": true,
 };
 
 var site_white_list = {
-
+  "twitter.com": {
+    "twimg.com": true
+  },
+  "google.co.jp": {
+    "gstatic.com": true
+  },
+  "amazon.co.jp": {
+    "images-amazon.com": true
+  },
+  "facebook.com": {
+    "fbcdn.net": true
+  }
 };
 
 var domain_regexp = new RegExp(".*?://(.*?)/.*");
@@ -31,7 +43,18 @@ var filter = function(details) {
     return;
   }
   var domain = getMainDomain(details.url);
-  
+  // 全体ホワイト リスト
+  if (global_white_list[domain]) {
+    console.log("GWL " + domain);
+    return;
+  }
+  // サイト ホワイト リスト
+  if (site_white_list[main_frame_domain]) {
+      if (site_white_list[main_frame_domain][domain]) {
+        console.log("SWL " + domain);
+        return;
+      }
+  }
   var block = domain != main_frame_domain;
   if (block) {
     console.log("B " + domain);
