@@ -15,6 +15,27 @@ var site_white_list = {
   },
   "facebook.com": {
     "fbcdn.net": true
+  },
+  "youtube.com": {
+    "ytimg.com": true
+  },
+  "google.com": {
+    "googleusercontent.com": true,
+    "gstatic.com": true
+  },
+  "dropbox.com": {
+    "dropboxstatic.com": true
+  },
+  "fubiz.net": {
+    "youtube.com": true,
+    "ytimg.com": true
+  },
+  "feedly.com": {
+    "youtube.com": true,
+    "ytimg.com": true
+  },
+  "uploaded.net": {
+    "google.com": true
   }
 };
 
@@ -36,6 +57,7 @@ var getMainDomain = function(url) {
 }
 
 var main_frame_domain = null;
+
 var filter = function(details) {
   if (details.type == "main_frame") {
     main_frame_domain = getMainDomain(details.url);
@@ -57,7 +79,7 @@ var filter = function(details) {
   }
   var block = domain != main_frame_domain;
   if (block) {
-    console.log("B " + domain);
+    console.log("B " + details.url);
   }
   else {
     console.log("P " + domain);
