@@ -1,6 +1,8 @@
 var global_white_list = {
   "googleapis.com": true,
   "cloudfront.net": true,
+  "youtube.com": true,
+  "aspnetcdn.com": true,
 };
 
 var site_white_list = {
@@ -11,13 +13,23 @@ var site_white_list = {
     "gstatic.com": true
   },
   "amazon.co.jp": {
-    "images-amazon.com": true
+    "images-amazon.com": true,
+    "ssl-images-amazon.com": true
+  },
+  "amazon.com": {
+    "awsstatic.com": true
   },
   "facebook.com": {
     "fbcdn.net": true
   },
   "youtube.com": {
     "ytimg.com": true
+  },
+  "vimeo.com": {
+    "vimeocdn.com": true
+  },
+  "instagram.com": {
+    "akamaihd.net": true
   },
   "google.com": {
     "googleusercontent.com": true,
@@ -28,11 +40,14 @@ var site_white_list = {
   },
   "fubiz.net": {
     "youtube.com": true,
-    "ytimg.com": true
+    "vimeo.com": true
+  },
+  "soundcloud.com": {
+    "sndcdn.com": true
   },
   "feedly.com": {
     "youtube.com": true,
-    "ytimg.com": true
+    "vimeo.com": true
   },
   "uploaded.net": {
     "google.com": true
@@ -56,35 +71,51 @@ var getMainDomain = function(url) {
   return parts.join(".");
 }
 
-var main_frame_domain = null;
+var frame_domains = {};
 
 var filter = function(details) {
+  if (!frame_domains[details.tabId]) {
+    frame_domains[details.tabId] = {};
+  }
+  // メイン フレーム
   if (details.type == "main_frame") {
-    main_frame_domain = getMainDomain(details.url);
-    //console.log(main_frame_domain);
+    frame_domains[details.tabId][details.frameId] = getMainDomain(details.url);
+    console.log("main_frame " + details.frameId + " = " + frame_domains[details.tabId][details.frameId]);
     return;
   }
+  // サブ フレーム / スクリプト
   var domain = getMainDomain(details.url);
-  // 全体ホワイト リスト
+  var parent_frame_domain;
+  if (details.type == "sub_frame") {
+    parent_frame_domain = frame_domains[details.tabId][details.parentFrameId];
+    frame_domains[details.tabId][details.frameId] = domain;
+  }
+  else {
+    parent_frame_domain = frame_domains[details.tabId][details.frameId];
+  }
+  if (!parent_frame_domain) {
+    console.log("No parent frame domain: " + details.tabId + ", " + details.parentFrameId);
+    return;
+  }
+  // 同じドメインなら許可
+  if (domain == parent_frame_domain) {
+    console.log("Same domain " + domain);
+    return;
+  }
+  // 全体ホワイト リストにあれば許可
   if (global_white_list[domain]) {
     console.log("GWL " + domain);
     return;
   }
-  // サイト ホワイト リスト
-  if (site_white_list[main_frame_domain]) {
-      if (site_white_list[main_frame_domain][domain]) {
-        console.log("SWL " + domain);
-        return;
-      }
+  // サイト ホワイト リストにあれば許可
+  if (site_white_list[parent_frame_domain]
+    && site_white_list[parent_frame_domain][domain]) {
+    console.log("SWL " + domain);
+    return;
   }
-  var block = domain != main_frame_domain;
-  if (block) {
-    console.log("B " + details.url);
-  }
-  else {
-    console.log("P " + domain);
-  }
-  return {cancel: block};
+  // 不許可
+  console.log("Block " + domain)
+  return {cancel: true};
 };
 
 chrome.webRequest.onBeforeRequest.addListener(
