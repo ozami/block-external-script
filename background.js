@@ -22,6 +22,10 @@ var site_white_list = {
   "facebook.com": {
     "fbcdn.net": true
   },
+  "flickr.com": {
+    "yimg.com": true,
+    "yahoo.com": true
+  },
   "youtube.com": {
     "ytimg.com": true
   },
@@ -30,6 +34,9 @@ var site_white_list = {
   },
   "instagram.com": {
     "akamaihd.net": true
+  },
+  "slideshare.net": {
+    "slidesharecdn.com": true
   },
   "google.com": {
     "googleusercontent.com": true,
