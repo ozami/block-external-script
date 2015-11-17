@@ -12,5 +12,11 @@
     "webRequest",
     "webRequestBlocking",
     "<all_urls>"
-  ]
+  ],
+  "browser_action": {
+    "default_icon": {
+      "38": "enabled.png"
+    },
+    "default_title": "Block External Script"
+  }
 }

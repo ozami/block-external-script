@@ -1,3 +1,5 @@
+var enabled = true;
+
 var global_white_list = {
   "googleapis.com": true,
   "cloudfront.net": true,
@@ -81,6 +83,9 @@ var getMainDomain = function(url) {
 var frame_domains = {};
 
 var filter = function(details) {
+  if (!enabled) {
+    return;
+  }
   if (!frame_domains[details.tabId]) {
     frame_domains[details.tabId] = {};
   }
@@ -133,3 +138,10 @@ chrome.webRequest.onBeforeRequest.addListener(
   },
   ["blocking"]
 );
+
+chrome.browserAction.onClicked.addListener(function() {
+  enabled = !enabled;
+  chrome.browserAction.setIcon({
+    path: {"38": enabled ? "enabled.png" : "disabled.png"}
+  });
+});
