@@ -5,6 +5,8 @@ var global_white_list = {
   "cloudfront.net": true,
   "youtube.com": true,
   "aspnetcdn.com": true,
+  "jquery.com": true,
+  "typekit.net": true,
 };
 
 var site_white_list = {
