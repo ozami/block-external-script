@@ -7,6 +7,7 @@ var global_white_list = {
   "aspnetcdn.com": true,
   "jquery.com": true,
   "typekit.net": true,
+  "akamaihd.net": true,
 };
 
 var site_white_list = {
@@ -36,15 +37,13 @@ var site_white_list = {
   "vimeo.com": {
     "vimeocdn.com": true
   },
-  "instagram.com": {
-    "akamaihd.net": true
-  },
   "slideshare.net": {
     "slidesharecdn.com": true
   },
   "google.com": {
     "googleusercontent.com": true,
-    "gstatic.com": true
+    "gstatic.com": true,
+    "googletagmanager.com": true,
   },
   "dropbox.com": {
     "dropboxstatic.com": true
@@ -59,6 +58,9 @@ var site_white_list = {
   "feedly.com": {
     "youtube.com": true,
     "vimeo.com": true
+  },
+  "live.com": {
+    "auth.gfx.ms": true,
   },
   "uploaded.net": {
     "google.com": true
