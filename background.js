@@ -19,10 +19,12 @@ var site_white_list = {
   },
   "amazon.co.jp": {
     "images-amazon.com": true,
-    "ssl-images-amazon.com": true
+    "ssl-images-amazon.com": true,
+    "amazonaws.com": true,
   },
   "amazon.com": {
-    "awsstatic.com": true
+    "awsstatic.com": true,
+    "amazonaws.com": true,
   },
   "facebook.com": {
     "fbcdn.net": true
