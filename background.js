@@ -26,6 +26,8 @@ var site_white_list = {
   "amazon.com": {
     "awsstatic.com": true,
     "amazonaws.com": true,
+    "images-amazon.com": true,
+    "ssl-images-amazon.com": true,
   },
   "facebook.com": {
     "fbcdn.net": true
