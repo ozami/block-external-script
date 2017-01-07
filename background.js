@@ -8,6 +8,7 @@ var global_white_list = {
   "jquery.com": true,
   "typekit.net": true,
   "akamaihd.net": true,
+  "fontawesome.com": true,
 };
 
 var site_white_list = {
