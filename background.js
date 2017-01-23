@@ -73,6 +73,9 @@ var site_white_list = {
   "uploaded.net": {
     "google.com": true
   }
+  "square-enix.com": {
+  	"google.com": true,
+  },
 };
 
 var domain_regexp = new RegExp(".*?://(.*?)/.*");
