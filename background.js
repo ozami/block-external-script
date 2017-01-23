@@ -32,6 +32,9 @@ var site_white_list = {
   "facebook.com": {
     "fbcdn.net": true
   },
+  "messenger.com": {
+    "fbcdn.net": true
+  },
   "flickr.com": {
     "yimg.com": true,
     "yahoo.com": true
