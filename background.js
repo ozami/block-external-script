@@ -76,6 +76,9 @@ var site_white_list = {
   "square-enix.com": {
   	"google.com": true,
   },
+  "freee.co.jp": {
+    "google.com": true,
+  },
 };
 
 var domain_regexp = new RegExp(".*?://(.*?)/.*");
