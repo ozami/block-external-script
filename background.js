@@ -1,83 +1,79 @@
 var enabled = true;
 
 var global_white_list = {
-  "googleapis.com": true,
-  "cloudfront.net": true,
-  "youtube.com": true,
-  "aspnetcdn.com": true,
-  "jquery.com": true,
-  "typekit.net": true,
-  "akamaihd.net": true,
-  "fontawesome.com": true,
+  "googleapis": true,
+  "cloudfront": true,
+  "youtube": true,
+  "aspnetcdn": true,
+  "jquery": true,
+  "typekit": true,
+  "akamaihd": true,
+  "fontawesome": true,
 };
 
 var site_white_list = {
-  "twitter.com": {
-    "twimg.com": true
+  "twitter": {
+    "twimg": true,
   },
-  "google.co.jp": {
-    "gstatic.com": true
+  "google": {
+    "gstatic": true,
+    "googleusercontent": true,
+    "googletagmanager": true,
   },
-  "amazon.co.jp": {
-    "images-amazon.com": true,
-    "ssl-images-amazon.com": true,
-    "amazonaws.com": true,
+  "amazon": {
+    "amazonaws": true,
+    "awsstatic": true,
+    "images-amazon": true,
+    "ssl-images-amazon": true,
   },
-  "amazon.com": {
-    "awsstatic.com": true,
-    "amazonaws.com": true,
-    "images-amazon.com": true,
-    "ssl-images-amazon.com": true,
+  "facebook": {
+    "fbcdn": true,
   },
-  "facebook.com": {
-    "fbcdn.net": true
+  "messenger": {
+    "fbcdn": true,
   },
-  "messenger.com": {
-    "fbcdn.net": true
+  "flickr": {
+    "yimg": true,
+    "yahoo": true
   },
-  "flickr.com": {
-    "yimg.com": true,
-    "yahoo.com": true
+  "youtube": {
+    "ytimg": true
   },
-  "youtube.com": {
-    "ytimg.com": true
+  "vimeo": {
+    "vimeocdn": true
   },
-  "vimeo.com": {
-    "vimeocdn.com": true
+  "slideshare": {
+    "slidesharecdn": true
   },
-  "slideshare.net": {
-    "slidesharecdn.com": true
+  "dropbox": {
+    "dropboxstatic": true
   },
-  "google.com": {
-    "googleusercontent.com": true,
-    "gstatic.com": true,
-    "googletagmanager.com": true,
+  "fubiz": {
+    "youtube": true,
+    "vimeo": true
   },
-  "dropbox.com": {
-    "dropboxstatic.com": true
+  "soundcloud": {
+    "sndcdn": true
   },
-  "fubiz.net": {
-    "youtube.com": true,
-    "vimeo.com": true
+  "feedly": {
+    "youtube": true,
+    "vimeo": true
   },
-  "soundcloud.com": {
-    "sndcdn.com": true
+  "live": {
+    "auth": true,
+    "p": true,
   },
-  "feedly.com": {
-    "youtube.com": true,
-    "vimeo.com": true
+  "skype": {
+      "skypeassets": true,
   },
-  "live.com": {
-    "auth.gfx.ms": true,
+  "square-enix": {
+  	"google": true,
   },
-  "uploaded.net": {
-    "google.com": true
-  }
-  "square-enix.com": {
-  	"google.com": true,
+  "freee": {
+    "google": true,
   },
-  "freee.co.jp": {
-    "google.com": true,
+  "tabelog": {
+    "k-img": true,
   },
 };
 
@@ -94,8 +90,7 @@ var getMainDomain = function(url) {
       break;
     }
   }
-  parts = parts.slice(i);
-  return parts.join(".");
+  return parts[i];
 }
 
 var frame_domains = {};
