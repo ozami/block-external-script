@@ -99,6 +99,9 @@ var filter = function(details) {
   if (!enabled) {
     return;
   }
+  if (details.tabId == -1) {
+    return;
+  }
   if (!frame_domains[details.tabId]) {
     frame_domains[details.tabId] = {};
   }
