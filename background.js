@@ -1,5 +1,12 @@
 var enabled = true;
 
+var dbg = function() {};
+if (false) {
+  dbg = function(message) {
+    console.log(message);
+  };
+}
+
 var global_white_list = {
   "googleapis": true,
   "cloudfront": true,
@@ -108,7 +115,7 @@ var filter = function(details) {
   // メイン フレーム
   if (details.type == "main_frame") {
     frame_domains[details.tabId][details.frameId] = getMainDomain(details.url);
-    console.log("main_frame " + details.frameId + " = " + frame_domains[details.tabId][details.frameId]);
+    dbg("main_frame " + details.frameId + " = " + frame_domains[details.tabId][details.frameId]);
     return;
   }
   // サブ フレーム / スクリプト
@@ -122,27 +129,27 @@ var filter = function(details) {
     parent_frame_domain = frame_domains[details.tabId][details.frameId];
   }
   if (!parent_frame_domain) {
-    console.log("No parent frame domain: " + details.tabId + ", " + details.parentFrameId);
+    dbg("No parent frame domain: " + details.tabId + ", " + details.parentFrameId);
     return;
   }
   // 同じドメインなら許可
   if (domain == parent_frame_domain) {
-    console.log("Same domain " + domain);
+    dbg("Same domain " + domain);
     return;
   }
   // 全体ホワイト リストにあれば許可
   if (global_white_list[domain]) {
-    console.log("GWL " + domain);
+    dbg("GWL " + domain);
     return;
   }
   // サイト ホワイト リストにあれば許可
   if (site_white_list[parent_frame_domain]
     && site_white_list[parent_frame_domain][domain]) {
-    console.log("SWL " + domain);
+    dbg("SWL " + domain);
     return;
   }
   // 不許可
-  console.log("Block " + domain)
+  dbg("Block " + domain)
   return {cancel: true};
 };
 
