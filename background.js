@@ -11,6 +11,7 @@ var global_white_list = {
   "googleapis": true,
   "cloudfront": true,
   "youtube": true,
+  "ytimg": true,
   "aspnetcdn": true,
   "jquery": true,
   "typekit": true,
