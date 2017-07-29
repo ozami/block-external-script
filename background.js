@@ -83,6 +83,9 @@ var site_white_list = {
   "tabelog": {
     "k-img": true,
   },
+  "workflowy": {
+    "ravenjs": true,
+  },
 };
 
 var domain_regexp = new RegExp(".*?://(.*?)/.*");
