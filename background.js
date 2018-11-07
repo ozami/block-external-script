@@ -19,6 +19,7 @@ var global_white_list = {
   "typekit": true,
   "akamaihd": true,
   "fontawesome": true,
+  "ravenjs": true,
 };
 
 var site_white_list = {
