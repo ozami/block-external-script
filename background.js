@@ -9,6 +9,8 @@ if (false) {
 
 var global_white_list = {
   "googleapis": true,
+  "cloudflare": true,
+  "jsdelivr": true,
   "cloudfront": true,
   "youtube": true,
   "ytimg": true,
